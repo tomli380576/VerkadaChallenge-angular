@@ -1,14 +1,18 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
+import { FloorplanDisplayComponent } from './floorplan-display/floorplan-display.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FloorplanDisplayComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
