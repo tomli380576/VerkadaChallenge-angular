@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FloorplanEditorComponent implements OnInit {
 
-  constructor() { }
+  camera_btn_x: number | undefined;
+  camera_btn_y: number | undefined;
 
-  ngOnInit(): void {
+  constructor() {
   }
 
+  ngOnInit(): void {
+
+  }
+
+  drop(event: any) {
+    console.log('dropped');
+    event.source._dragRef.reset();
+  }
 }

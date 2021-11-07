@@ -22,4 +22,9 @@ export class FloorplanService {
     return hard_coded_data;
   }
 
+  exportFloorPlan(data: FloorPlanData) {
+    console.log(data);
+    const exported_JSON = JSON.stringify(data); // this is ready to save
+  }
+
 }

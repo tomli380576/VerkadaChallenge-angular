@@ -1,21 +1,22 @@
 <div fxLayout="column" fxLayoutAlign="space-around center">
 
   <mat-card class="editor-content">
-    <div fxLayout="row" fxLayoutAlign="center center" >
-      <app-floorplan-display></app-floorplan-display>
+    <div fxLayout="row" fxLayoutAlign="center center" cdkDropListGroup>
+      <app-floorplan-display (cdkDropListDropped)="drop($event)"></app-floorplan-display>
 
       <div fxLayout="column" fxLayoutAlign="space-around center">
         <button mat-raised-button color="primary">Add Camera</button>
         <button mat-raised-button color="warn">Delete Camera</button>
         <button mat-raised-button disabled>Save</button>
-        <button mat-mini-fab>
+        <button mat-mini-fab cdkDrag id="camera-btn"
+          (cdkDragReleased)="drop($event)">
           <mat-icon aria-hidden="false" aria-label="Example home icon">photo_camera</mat-icon>
         </button>
       </div>
     </div>
   </mat-card>
 
-  <div class="spacer editor-content" >
+  <div class="spacer editor-content">
 
   </div>
 

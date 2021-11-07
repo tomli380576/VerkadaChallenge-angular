@@ -1,29 +1,9 @@
 <table>
-  <tr *ngFor="let row of floorPlan.floorPlan">
-    <th *ngFor="let cell of row" [ngClass]="{'wall': cell==1, 'empty-space': cell==0}">
+  <tr *ngFor="let row of floorPlan.floorPlan; index as y">
+    <th *ngFor="let cell of row; index as x"
+      [ngClass]="{'wall': cell==1, 'empty-space': cell==0, 'placed-cam': cell==2}" (mouseover)="onMouseOver(x, y)"
+      (mouseup)="onMouseUp(x, y)">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="cell == 2">photo_camera</mat-icon>
     </th>
   </tr>
 </table>
-
-<!-- <mat-grid-list cols="1" rowHeight="{{floorPlan.width}}:1" style="border: 1px solid black;">
-  <mat-grid-tile *ngFor="let cell of floorPlan.floorPlan">
-    dlkjflskd
-  </mat-grid-tile>
-</mat-grid-list> -->
-
-<!-- <table (mouseup)="doneSelection()" style="padding: 20px">
-    <tr style="font-size: small">
-        <th></th>
-        <th *ngFor="let day of days">{{day | weekday}}</th>
-    </tr>
-
-    <tr *ngFor="let row of timeCells; index as i">
-        <th *ngIf="i % intervalsPerHour == 0" [rowSpan]="intervalsPerHour">
-            {{get12HrString(row[0].time.hours)}}
-        </th>
-
-        <th *ngFor="let cell of row" [style.backgroundColor]="cell.color" (touchstart)="selectFrom(cell, $event)"
-            (touchmove)="selectTo(cell, $event)" (touchend)="doneSelection()" id = "slot">
-        </th>
-    </tr>
-</table> -->
