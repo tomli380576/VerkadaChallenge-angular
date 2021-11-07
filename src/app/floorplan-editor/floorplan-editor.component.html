@@ -2,15 +2,16 @@
 
   <mat-card class="editor-content">
     <div fxLayout="row" fxLayoutAlign="center center" cdkDropListGroup>
-      <app-floorplan-display (cdkDropListDropped)="drop($event)"></app-floorplan-display>
+      <app-floorplan-display [(floorPlanData)]="floorPlanData" (doneAddingCam)="doneAdding()"></app-floorplan-display>
 
       <div fxLayout="column" fxLayoutAlign="space-around center">
-        <button mat-raised-button color="primary">Add Camera</button>
-        <button mat-raised-button color="warn">Delete Camera</button>
-        <button mat-raised-button disabled>Save</button>
-        <button mat-mini-fab cdkDrag id="camera-btn"
-          (cdkDragReleased)="drop($event)">
-          <mat-icon aria-hidden="false" aria-label="Example home icon">photo_camera</mat-icon>
+        <button mat-raised-button color="primary" disabled="{{dragging_camera_btn || isAdding}}" (click)="onAdd()">Add
+          Camera</button>
+        <button mat-raised-button color="warn" disabled="{{dragging_camera_btn || isAdding}}">Delete Camera</button>
+        <button mat-raised-button disabled="{{dragging_camera_btn || isAdding}}"
+          (click)="floorPlanService.exportFloorPlan(floorPlanData)">Save</button>
+        <button mat-mini-fab cdkDrag (cdkDragReleased)="drop($event)" (cdkDragStarted)="onDrag()">
+          <mat-icon>photo_camera</mat-icon>
         </button>
       </div>
     </div>

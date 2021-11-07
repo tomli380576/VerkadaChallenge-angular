@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FloorPlanData } from 'src/models/floorplandata';
+import { FloorplanService } from 'src/services/floorplan.service';
 
 @Component({
   selector: 'app-floorplan-editor',
@@ -7,18 +9,41 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FloorplanEditorComponent implements OnInit {
 
-  camera_btn_x: number | undefined;
-  camera_btn_y: number | undefined;
+  floorPlanService: FloorplanService;
+  floorPlanData: FloorPlanData;
 
-  constructor() {
+  isAdding: boolean = false;
+  isDeleting: boolean = false;
+  dragging_camera_btn: boolean = false;
+
+  constructor(floorPlanService: FloorplanService) {
+    this.floorPlanService = floorPlanService;
+    this.floorPlanData = floorPlanService.hardcodedData();
   }
 
   ngOnInit(): void {
 
   }
 
+  onDrag() {
+    this.dragging_camera_btn = true;
+  }
+
+  onMouseUp() {
+    console.log('up');
+  }
+
   drop(event: any) {
     console.log('dropped');
+    this.dragging_camera_btn = false;
     event.source._dragRef.reset();
+  }
+
+  onAdd() {
+    this.isAdding = true;
+  }
+
+  doneAdding(){
+    this.isAdding = false;
   }
 }

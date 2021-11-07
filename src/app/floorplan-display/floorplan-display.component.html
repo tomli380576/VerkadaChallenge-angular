@@ -1,5 +1,5 @@
 <table>
-  <tr *ngFor="let row of floorPlan.floorPlan; index as y">
+  <tr *ngFor="let row of floorPlanData.floorPlan; index as y">
     <th *ngFor="let cell of row; index as x"
       [ngClass]="{'wall': cell==1, 'empty-space': cell==0, 'placed-cam': cell==2}" (mouseover)="onMouseOver(x, y)"
       (mouseup)="onMouseUp(x, y)">

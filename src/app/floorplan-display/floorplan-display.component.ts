@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { FloorplanService } from 'src/services/floorplan.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FloorPlanData } from 'src/models/floorplandata';
 
 @Component({
@@ -9,16 +8,16 @@ import { FloorPlanData } from 'src/models/floorplandata';
 })
 export class FloorplanDisplayComponent implements OnInit {
 
-  floorPlan: FloorPlanData;
-  isAdding: boolean = false;
-  isDeleting: boolean = false;
+  @Input() floorPlanData!: FloorPlanData;
+  @Output() floorPlanDataChange = new EventEmitter<FloorPlanData>();
+  @Output() doneAddingCam = new EventEmitter();
 
-  constructor(floorPlanService: FloorplanService) {
-    this.floorPlan = floorPlanService.hardcodedData();
+  constructor() {
+
   }
 
   ngOnInit(): void {
-    console.log(this.floorPlan);
+    console.log(this.floorPlanData);
   }
 
   onMouseOver(x: number, y: number): void {
@@ -31,16 +30,15 @@ export class FloorplanDisplayComponent implements OnInit {
 
   onMouseUp(x: number, y: number): void {
     console.log("mouseup", x, y);
-    let slot_val = this.floorPlan.floorPlan[y][x];
+    let slot_val = this.floorPlanData.floorPlan[y][x];
     if (slot_val == 2) {
-      this.floorPlan.floorPlan[y][x] = 0;
+      this.floorPlanData.floorPlan[y][x] = 0;
     } else {
-      slot_val == 0 ? this.floorPlan.floorPlan[y][x] = 2 : {};
+      slot_val == 0 ? this.floorPlanData.floorPlan[y][x] = 2 : {};
     }
-  }
-  drop(event: any) {
-    console.log('dropped');
-  }
 
+    this.floorPlanDataChange.emit(this.floorPlanData);
+    this.doneAddingCam.emit();
+  }
 
 }

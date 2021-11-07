@@ -11,7 +11,7 @@ export class FloorplanService {
 
   /**
    * @brief This class is decoupled from the view model
-   * Make a new function if we need dynamic data and call that one
+   * Make a new function if we need dynamic data
    */
   hardcodedData(): FloorPlanData {
     let hard_coded_data: FloorPlanData = {
@@ -23,8 +23,12 @@ export class FloorplanService {
   }
 
   exportFloorPlan(data: FloorPlanData) {
+    console.log('exported');
     console.log(data);
     const exported_JSON = JSON.stringify(data); // this is ready to save
   }
 
+  save(){
+    console.log('saved');
+  }
 }
