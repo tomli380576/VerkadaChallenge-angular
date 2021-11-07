@@ -9,14 +9,16 @@ import { FloorPlanData } from 'src/models/floorplandata';
 })
 export class FloorplanDisplayComponent implements OnInit {
 
-  floorPlan: FloorPlanData | null;
+  floorPlan: FloorPlanData;
 
   constructor(floorPlanService: FloorplanService) {
-    this.floorPlan = null;
-    
+    this.floorPlan = floorPlanService.hardcodedData();
   }
 
   ngOnInit(): void {
+    console.log(this.floorPlan);
+    
+
   }
 
 }

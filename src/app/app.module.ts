@@ -4,15 +4,28 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
 import { FloorplanDisplayComponent } from './floorplan-display/floorplan-display.component';
+import { FloorplanEditorComponent } from './floorplan-editor/floorplan-editor.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FloorplanDisplayComponent
+    FloorplanDisplayComponent,
+    FloorplanEditorComponent
   ],
   imports: [
     BrowserModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    BrowserAnimationsModule,
+    MatGridListModule,
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

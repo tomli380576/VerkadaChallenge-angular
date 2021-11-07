@@ -1,0 +1,33 @@
+<div fxLayout="column" fxLayoutAlign="space-around center">
+
+  <mat-card class="editor-content">
+    <div fxLayout="row" fxLayoutAlign="center center" >
+      <app-floorplan-display></app-floorplan-display>
+
+      <div fxLayout="column" fxLayoutAlign="space-around center">
+        <button mat-raised-button color="primary">Add Camera</button>
+        <button mat-raised-button color="warn">Delete Camera</button>
+        <button mat-raised-button disabled>Save</button>
+        <button mat-mini-fab>
+          <mat-icon aria-hidden="false" aria-label="Example home icon">photo_camera</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-card>
+
+  <div class="spacer editor-content" >
+
+  </div>
+
+  <mat-card class="editor-content">
+    <mat-card-title>Add Cameras by Using one of the following 2 ways!</mat-card-title>
+    <mat-card-content>
+      <li>
+        Click the Add Camera button, then click a spot on the grid.
+      </li>
+      <li>
+        Drag the camera symbol to a grid spot.
+      </li>
+    </mat-card-content>
+  </mat-card>
+</div>
