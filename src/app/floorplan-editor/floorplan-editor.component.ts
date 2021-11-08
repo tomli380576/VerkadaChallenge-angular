@@ -17,24 +17,36 @@ export class FloorplanEditorComponent implements OnInit {
   dragging_camera_btn: boolean = false;
   curr_cam_orientation: number = 0;
 
+  orig_cam_x: number | undefined;
+  orig_cam_y: number | undefined;
+
   constructor(public floorPlanService: FloorplanService, public dialog: MatDialog) {
     this.floorPlanService = floorPlanService;
     this.floorPlanData = floorPlanService.hardcodedData();
   }
 
   ngOnInit(): void {
-    document.getElementById("c")?.addEventListener("mouseup", ()=>{console.log("upssss")});
+    let rect = document.getElementById("cam")?.getBoundingClientRect();
+    this.orig_cam_x = rect?.x;
+    this.orig_cam_y = rect?.y;
   }
 
-  onDrag() {
+  onDrag(event: any) {
     this.dragging_camera_btn = true;
+    const cam_btn = document.getElementById("cam");
+    console.log(event.clientX, event.clientY);
+    console.log(cam_btn?.offsetLeft);
+    cam_btn!.style.top = (event.clientY).toString() + 'px';
+    cam_btn!.style.left = (event.clientX - cam_btn!.offsetLeft).toString() + 'px' ;
+    console.log(cam_btn?.style.top, cam_btn?.style.left);
+    console.log(cam_btn?.style);
   }
 
-  onMouseUp(x: number, y: number): void {
+  addCam(x: number, y: number): void {
     if (this.isAdding) {
       console.log("mouseup", x, y);
       let slot_val = this.floorPlanData.floorPlan[y][x];
-      if (slot_val != 1){
+      if (slot_val != 1) {
         if (slot_val >= 2) {
           this.floorPlanData.floorPlan[y][x] = 0;
         } else {
