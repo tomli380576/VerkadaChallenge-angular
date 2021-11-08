@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FloorplanDisplayComponent } from './floorplan-display.component';
+import { CameraConfigDialogComponent } from './camera-config-dialog.component';
 
-describe('FloorplanDisplayComponent', () => {
-  let component: FloorplanDisplayComponent;
-  let fixture: ComponentFixture<FloorplanDisplayComponent>;
+describe('CameraConfigDialogComponent', () => {
+  let component: CameraConfigDialogComponent;
+  let fixture: ComponentFixture<CameraConfigDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FloorplanDisplayComponent ]
+      declarations: [ CameraConfigDialogComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FloorplanDisplayComponent);
+    fixture = TestBed.createComponent(CameraConfigDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

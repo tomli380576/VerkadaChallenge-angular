@@ -1,9 +1,0 @@
-<table>
-  <tr *ngFor="let row of floorPlanData.floorPlan; index as y">
-    <th *ngFor="let cell of row; index as x"
-      [ngClass]="{'wall': cell==1, 'empty-space': cell==0, 'placed-cam': cell==2}" (mouseover)="onMouseOver(x, y)"
-      (mouseup)="onMouseUp(x, y)">
-      <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="cell == 2">photo_camera</mat-icon>
-    </th>
-  </tr>
-</table>
