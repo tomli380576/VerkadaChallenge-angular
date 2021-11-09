@@ -21,7 +21,7 @@
         <button mat-raised-button color="primary" disabled="{{dragging_camera_btn || isAdding}}"
           (click)="isAdding = true;">
           Edit Camera</button>
-        <button mat-raised-button color="warn" *ngIf="isAdding" (click)="isAdding=false">Finish Edits</button>
+        <button mat-raised-button color="warn" *ngIf="isAdding" (click)="isAdding=false">Finish Editing</button>
         <button mat-raised-button disabled="{{dragging_camera_btn || isAdding}}"
           (click)="floorPlanService.exportFloorPlan(floorPlanData)" >Save/Export</button>
       </div>
