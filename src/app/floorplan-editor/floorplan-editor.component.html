@@ -23,8 +23,7 @@
           Edit Camera</button>
         <button mat-raised-button color="warn" *ngIf="isAdding" (click)="isAdding=false">Finish Edits</button>
         <button mat-raised-button disabled="{{dragging_camera_btn || isAdding}}"
-          (click)="floorPlanService.exportFloorPlan(floorPlanData)" style="background: royalblue;
-            color: white;">Save</button>
+          (click)="floorPlanService.exportFloorPlan(floorPlanData)" >Save/Export</button>
       </div>
       <button mat-mini-fab id="cam" class="cam-btn" (cdkDragStarted)="onDrag()" (cdkDragReleased)="drop($event)"
         cdkDrag>
@@ -56,14 +55,14 @@
           </li>
         </div>
 
-        <mat-card>
-          <mat-card-title>Legend</mat-card-title>
+        <div>
+          <h2>Legend</h2>
           <mat-card-content fxLayout="column" fxLayoutAlign="space-around center">
             <div class="wall-legend"><span>Wall</span></div>
             <div style="margin: 2px;"></div>
             <div class="empty-space-legend"><span>Space</span></div>
           </mat-card-content>
-        </mat-card>
+        </div>
       </div>
     </mat-card-content>
   </mat-card>

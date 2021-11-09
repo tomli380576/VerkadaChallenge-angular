@@ -7,6 +7,7 @@ I chose to repesent camera orientation with integer for this challenge. It keep 
 3 is south
 4 is east
 5 is west
+6 is no orientation
 
 If we were to implement something similar in production, it would probably be better to wrap everything in objects since we might have more properties than just orientation.
 
