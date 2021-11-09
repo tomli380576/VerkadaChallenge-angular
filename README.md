@@ -15,4 +15,4 @@ If we were to implement something similar in production, it would probably be be
 
 Run `ng serve --open` for a dev server.
 
-Still working on a 3d version of this in React...
+Still working on a 3d version of this in React: https://github.com/tomli380576/verkada-challenge-3d
