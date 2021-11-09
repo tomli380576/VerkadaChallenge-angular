@@ -1,12 +1,10 @@
 <div fxLayout="column" fxLayoutAlign="space-around center">
-
   <mat-card class="editor-content">
     <div fxLayout="row" fxLayoutAlign="center center">
       <table>
         <tr *ngFor="let row of floorPlanData.floorPlan; index as y">
           <th *ngFor="let cell of row; index as x"
-            [ngClass]="{'wall': cell==1, 'empty-space': cell==0, 'placed-cam': cell>=2}" (body:mouseup)="test()"
-            (mouseup)="addCam(x, y)">
+            [ngClass]="{'wall': cell==1, 'empty-space': cell==0, 'placed-cam': cell>=2}" (mouseup)="editCam(x, y)">
             <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="cell >= 2">photo_camera</mat-icon>
             <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="cell == 2">north</mat-icon>
             <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="cell == 3">south</mat-icon>
@@ -17,15 +15,18 @@
       </table>
 
       <div fxLayout="column" fxLayoutAlign="space-around center">
+        <h2 *ngIf="isAdding" mat-dialog-title>
+          Editing Mode
+        </h2>
         <button mat-raised-button color="primary" disabled="{{dragging_camera_btn || isAdding}}"
           (click)="isAdding = true;">
           Edit Camera</button>
-        <button mat-raised-button color="warn" *ngIf="isAdding" (click)="isAdding=false">Finish Edit</button>
+        <button mat-raised-button color="warn" *ngIf="isAdding" (click)="isAdding=false">Finish Edits</button>
         <button mat-raised-button disabled="{{dragging_camera_btn || isAdding}}"
           (click)="floorPlanService.exportFloorPlan(floorPlanData)" style="background: royalblue;
             color: white;">Save</button>
       </div>
-      <button mat-mini-fab id="cam" class="cam-btn" (mousedown)="onDrag()" (mouseup)="this.dragging_camera_btn = false"
+      <button mat-mini-fab id="cam" class="cam-btn" (cdkDragStarted)="onDrag()" (cdkDragReleased)="drop($event)"
         cdkDrag>
         <mat-icon>photo_camera</mat-icon>
       </button>
@@ -37,14 +38,33 @@
   </div>
 
   <mat-card class="editor-content">
-    <mat-card-title>Add Cameras by Using one of the following 2 ways!</mat-card-title>
+    <mat-card-title>Add cameras by using one of the following 2 ways!</mat-card-title>
     <mat-card-content>
-      <li>
-        Click the Add Camera button, then click a spot on the grid.
-      </li>
-      <li>
-        Drag the camera symbol to a grid spot.
-      </li>
+      <div fxLayout="row" fxLayoutAlign="space-around center">
+        <div>
+          <li>
+            Click the <button mat-raised-button color="primary">Edit Camera</button> button, then click a spot on the
+            grid.
+            <ul>
+              <li>
+                In "Editing Mode", click an existing camera to remove it.
+              </li>
+            </ul>
+          </li>
+          <li>
+            Drag the camera symbol to a grid spot.
+          </li>
+        </div>
+
+        <mat-card>
+          <mat-card-title>Legend</mat-card-title>
+          <mat-card-content fxLayout="column" fxLayoutAlign="space-around center">
+            <div class="wall-legend"><span>Wall</span></div>
+            <div style="margin: 2px;"></div>
+            <div class="empty-space-legend"><span>Space</span></div>
+          </mat-card-content>
+        </mat-card>
+      </div>
     </mat-card-content>
   </mat-card>
 </div>

@@ -24,11 +24,7 @@ export class FloorplanService {
 
   exportFloorPlan(data: FloorPlanData) {
     console.log('exported');
-    console.log(data);
     const exported_JSON = JSON.stringify(data); // this is ready to save
-  }
-
-  save(){
-    console.log('saved');
+    console.log(exported_JSON);
   }
 }
