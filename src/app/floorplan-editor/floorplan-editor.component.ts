@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FloorPlanData } from 'src/models/floorplandata';
 import { FloorplanService } from 'src/services/floorplan.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -31,17 +31,22 @@ export class FloorplanEditorComponent implements OnInit {
     this.orig_cam_y = rect?.y;
   }
 
-  onDrag(event: any) {
+  onDragTest(event: any) {
     this.dragging_camera_btn = true;
     const cam_btn = document.getElementById("cam");
     console.log(event.clientX, event.clientY);
     console.log(cam_btn?.offsetLeft);
-    cam_btn!.style.top = (event.clientY).toString() + 'px';
+    cam_btn!.style.top = (event.clientY - 10).toString() + 'px';
     cam_btn!.style.left = (event.clientX - cam_btn!.offsetLeft).toString() + 'px' ;
     console.log(cam_btn?.style.top, cam_btn?.style.left);
     console.log(cam_btn?.style);
   }
 
+  onDrag(){
+    this.dragging_camera_btn = true;
+  }
+
+  @HostListener('mouseup', ['$event.target'])
   addCam(x: number, y: number): void {
     if (this.isAdding) {
       console.log("mouseup", x, y);
@@ -72,5 +77,10 @@ export class FloorplanEditorComponent implements OnInit {
     console.log('dropped');
     this.dragging_camera_btn = false;
     event.source._dragRef.reset();
+  }
+
+
+  test(){
+    console.log('sdsd')
   }
 }

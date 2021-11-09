@@ -1,11 +1,12 @@
 <div fxLayout="column" fxLayoutAlign="space-around center">
 
   <mat-card class="editor-content">
-    <div fxLayout="row" fxLayoutAlign="center center" cdkDropListGroup>
+    <div fxLayout="row" fxLayoutAlign="center center">
       <table>
         <tr *ngFor="let row of floorPlanData.floorPlan; index as y">
           <th *ngFor="let cell of row; index as x"
-            [ngClass]="{'wall': cell==1, 'empty-space': cell==0, 'placed-cam': cell>=2}" (mouseup)="addCam(x, y)">
+            [ngClass]="{'wall': cell==1, 'empty-space': cell==0, 'placed-cam': cell>=2}" (body:mouseup)="test()"
+            (mouseup)="addCam(x, y)">
             <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="cell >= 2">photo_camera</mat-icon>
             <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="cell == 2">north</mat-icon>
             <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="cell == 3">south</mat-icon>
@@ -23,11 +24,11 @@
         <button mat-raised-button disabled="{{dragging_camera_btn || isAdding}}"
           (click)="floorPlanService.exportFloorPlan(floorPlanData)" style="background: royalblue;
             color: white;">Save</button>
-        <button mat-mini-fab id="cam" class="cam-btn" (mousedown)="onDrag($event)"
-          (mouseup)="this.dragging_camera_btn = false">
-          <mat-icon>photo_camera</mat-icon>
-        </button>
       </div>
+      <button mat-mini-fab id="cam" class="cam-btn" (mousedown)="onDrag()" (mouseup)="this.dragging_camera_btn = false"
+        cdkDrag>
+        <mat-icon>photo_camera</mat-icon>
+      </button>
     </div>
   </mat-card>
 
