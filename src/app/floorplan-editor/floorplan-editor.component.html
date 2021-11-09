@@ -1,19 +1,34 @@
 <div fxLayout="column" fxLayoutAlign="space-around center">
 
   <mat-card class="editor-content">
-    <div fxLayout="row" fxLayoutAlign="center center" cdkDropListGroup>
-      <app-floorplan-display [(floorPlanData)]="floorPlanData" (doneAddingCam)="doneAdding()"></app-floorplan-display>
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <table>
+        <tr *ngFor="let row of floorPlanData.floorPlan; index as y">
+          <th *ngFor="let cell of row; index as x"
+            [ngClass]="{'wall': cell==1, 'empty-space': cell==0, 'placed-cam': cell>=2}" (body:mouseup)="test()"
+            (mouseup)="addCam(x, y)">
+            <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="cell >= 2">photo_camera</mat-icon>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="cell == 2">north</mat-icon>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="cell == 3">south</mat-icon>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="cell == 4">east</mat-icon>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="cell == 5">west</mat-icon>
+          </th>
+        </tr>
+      </table>
 
       <div fxLayout="column" fxLayoutAlign="space-around center">
-        <button mat-raised-button color="primary" disabled="{{dragging_camera_btn || isAdding}}" (click)="onAdd()">Add
-          Camera</button>
-        <button mat-raised-button color="warn" disabled="{{dragging_camera_btn || isAdding}}">Delete Camera</button>
+        <button mat-raised-button color="primary" disabled="{{dragging_camera_btn || isAdding}}"
+          (click)="isAdding = true;">
+          Edit Camera</button>
+        <button mat-raised-button color="warn" *ngIf="isAdding" (click)="isAdding=false">Finish Edit</button>
         <button mat-raised-button disabled="{{dragging_camera_btn || isAdding}}"
-          (click)="floorPlanService.exportFloorPlan(floorPlanData)">Save</button>
-        <button mat-mini-fab cdkDrag (cdkDragReleased)="drop($event)" (cdkDragStarted)="onDrag()">
-          <mat-icon>photo_camera</mat-icon>
-        </button>
+          (click)="floorPlanService.exportFloorPlan(floorPlanData)" style="background: royalblue;
+            color: white;">Save</button>
       </div>
+      <button mat-mini-fab id="cam" class="cam-btn" (mousedown)="onDrag()" (mouseup)="this.dragging_camera_btn = false"
+        cdkDrag>
+        <mat-icon>photo_camera</mat-icon>
+      </button>
     </div>
   </mat-card>
 
